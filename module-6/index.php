@@ -7,9 +7,8 @@
     }
 
     function remove( array &$storage, int $index ) {
-        
-        if($storage[$index]) {
-            echo $storage[$index];
+        if(array_key_exists( $index ,$storage)) {
+            # echo $storage[$index];
             unset($storage[$index]);
             return true;
         }
