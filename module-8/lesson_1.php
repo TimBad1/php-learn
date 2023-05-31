@@ -1,5 +1,5 @@
 <?php
-    class Employee
+    class Employees
     {
         public $age, $gender, $name, $surname, $position;
         function displayName() {
@@ -15,8 +15,8 @@
         }
     }
 
-    $employee_1 = new Employee();
-    $employee_2 = new Employee();
+    $employee_1 = new Employees();
+    $employee_2 = new Employees();
 
 
     $employee_1->age = 30;

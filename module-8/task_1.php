@@ -40,10 +40,8 @@
         }
     }
 
-    $telegraph = new TelegraphText('Pushkin', 'test_text_file');
+//    $telegraph = new TelegraphText('Pushkin', 'test_text_file');
 //    $telegraph->showTelegraph();
-    $telegraph->editText('Ещё более новая запись', 'Супер-заголовок');
-    $telegraph->storeText();
-    $telegraph->loadText('test_text_file');
-
-
+//    $telegraph->editText('Ещё более новая запись', 'Супер-заголовок');
+//    $telegraph->storeText();
+//    $telegraph->loadText('test_text_file');
