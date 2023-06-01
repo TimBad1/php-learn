@@ -30,7 +30,7 @@ class TelegraphText {
             return $unserFile['text'];
 
         } else {
-            echo "Файл $slug не существует";
+            echo 'Файл ' . $slug . ' не существует' . PHP_EOL;
         }
     }
 
@@ -102,7 +102,7 @@ class FileStorage extends Storage {
             $serFile = serialize($obj);
             file_put_contents($slug, $serFile);
         } else {
-            echo "Файл $slug не существует";
+            echo 'Файл ' . $slug . ' не существует' . PHP_EOL;
         }
     }
 
@@ -112,7 +112,7 @@ class FileStorage extends Storage {
             if (file_exists($slug)) {
                 unlink($slug);
             } else {
-                echo "Файл $slug не существует";
+                echo 'Файл ' . $slug . ' не существует' . PHP_EOL;
             }
         }
     }
