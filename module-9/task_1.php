@@ -98,19 +98,28 @@ class FileStorage extends Storage {
 
     function update($slug, TelegraphText $obj)
     {
-        $serFile = serialize($obj);
-        file_put_contents($slug, $serFile);
+        if (file_exists($slug)) {
+            $serFile = serialize($obj);
+            file_put_contents($slug, $serFile);
+        } else {
+            echo "Файл $slug не существует";
+        }
     }
 
     function delete($slug)
     {
-        unlink($slug);
+        {
+            if (file_exists($slug)) {
+                unlink($slug);
+            } else {
+                echo "Файл $slug не существует";
+            }
+        }
     }
 
     function list()
     {
         $searchRoot = '../';
-        $searchName = 'readme.txt';
         $searchResult = [];
 
         $files = scandir($searchRoot);
