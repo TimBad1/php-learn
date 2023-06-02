@@ -1,4 +1,15 @@
 <?php
+$log = 'log.txt';
+
+interface LoggerInterface {
+    public function logMessage(string $error);
+    public function lastMessages(int $count);
+}
+
+interface EventListenerInterface {
+    public function attachEvent(string $method, callable $funcName);
+    public function detouchEvent (string $method);
+}
 
 class TelegraphText {
     public $text, $title, $author, $published, $slug;
@@ -40,12 +51,41 @@ class TelegraphText {
     }
 }
 
-abstract class Storage {
+abstract class Storage implements LoggerInterface, EventListenerInterface {
     abstract function create(TelegraphText $obj);
     abstract function read($slug);
     abstract function update($slug, TelegraphText $obj);
     abstract function delete ($slug);
     abstract function list();
+
+    public function logMessage(string $error)
+    {
+        $current = file_get_contents('log.txt');
+        $current .= $error . PHP_EOL;
+        file_put_contents('log.txt', $current);
+    }
+
+    public function lastMessages(int $count)
+    {
+        $lines = file('log.txt');
+        if(count($lines) < $count) {
+            for($i = 0; $i < count($lines); $i++) {
+                echo $lines[$i];
+            }
+        } else {
+            for($i = count($lines) - $count; $i < count($lines); $i++) {
+                echo $lines[$i];
+            }
+        }
+    }
+    public function attachEvent(string $method, callable $funcName)
+    {
+        // TODO: Implement attachEvent() method.
+    }
+    public function detouchEvent(string $method)
+    {
+        // TODO: Implement detouchEvent() method.
+    }
 }
 
 abstract class View {
@@ -58,7 +98,7 @@ abstract class View {
     abstract function displayTextByUrl($url);
 }
 
-abstract class User {
+abstract class User implements EventListenerInterface{
     public $id, $name, $role;
     abstract function getTextsToEdit();
 }
@@ -142,3 +182,8 @@ $new_telegraph = new FileStorage;
 $new_telegraph->create($telegraph);
 $new_telegraph->read('test_text_file');
 $new_telegraph->update('test_text_file', $telegraph);
+
+//$new_telegraph->logMessage('first error');
+//$new_telegraph->logMessage('second error');
+//$new_telegraph->logMessage('third error');
+//$new_telegraph->lastMessages(5);
