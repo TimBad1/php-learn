@@ -12,25 +12,89 @@ interface EventListenerInterface {
 }
 
 class TelegraphText {
-    public $text, $title, $author, $published, $slug;
+    private $text, $title, $author, $published, $slug;
 
     public function __construct($author, $slug)
     {
-        $this->author = $author;
-        $this->slug = $slug;
+        $this->author;
+        $this->setSlug($slug);
         $this->published = date("Y-m-d");
     }
 
-    public function showTelegraph() {
+    public function setAuthor(string $author): void
+    {
+        if (count($author) > 120) {
+            echo 'Имя автора слишком длинное' . PHP_EOL;
+            return;
+        }
+        $this->author = $author;
+    }
+
+    public function setSlug($slug): void
+    {
+        if(!preg_match('/^[\w\-]+$/i', $slug)) {
+            echo 'Может содержать только буквы латинского алфавита, цифры и символы —_';
+            return;
+        }
+        $this->slug = $slug;
+    }
+
+    public function setPublished(DateTime $published): void
+    {
+        if($published < date("Y-m-d")) {
+            echo 'Дата должна быть больше или равна текущей' . PHP_EOL;
+            return;
+        }
+        $this->published = $published;
+    }
+
+    public function __get($name){
+        switch ($name) {
+            case '$published':
+                return $this->published;
+            case 'slug':
+                return $this->slug;
+            case 'author':
+                return $this->author;
+            case 'text':
+                return $this->loadText();
+//            case 'title':
+//                return $this->title;
+        }
+    }
+
+    public function __set($name, $value){
+
+        switch ($name) {
+            case 'published':
+                $this->setPublished($value);
+                break;
+            case 'slug':
+                $this->setSlug($value);
+                break;
+            case 'author':
+                $this->setAuthor($value);
+                break;
+            case 'text':
+                $this->storeText($value);
+
+                break;
+//            case 'title':
+//                $this->title = $value;
+        }
+    }
+    public function showTelegraph(): void
+    {
         echo $this->author . ' ' . $this->slug . ' ' . $this->published . PHP_EOL;
     }
-    public function storeText() {
+    private function storeText(): void
+    {
         $entry = [ 'text' => $this->text, 'title' => $this->title, 'author' => $this->author, 'published' => $this->published];
         $serFile = serialize($entry);
         file_put_contents($this->slug, $serFile);
     }
 
-    public function loadText($slug) {
+    private function loadText($slug) {
         if (file_exists($slug)) {
             $file = file_get_contents($slug);
             $unserFile = unserialize($file);
@@ -99,7 +163,7 @@ abstract class View {
 }
 
 abstract class User implements EventListenerInterface{
-    public $id, $name, $role;
+    protected $id, $name, $role;
     abstract function getTextsToEdit();
 }
 
@@ -172,16 +236,16 @@ class FileStorage extends Storage {
     }
 }
 
-$telegraph = new TelegraphText('Pushkin', 'test_text_file');
-$telegraph->showTelegraph();
-$telegraph->editText('Ещё более новая запись', 'Супер-заголовок');
-$telegraph->storeText();
-$telegraph->loadText('test_text_file');
+//$telegraph = new TelegraphText('Pushkin', 'test_text_file');
+//$telegraph->showTelegraph();
+//$telegraph->editText('Ещё более новая запись', 'Супер-заголовок');
+//$telegraph->storeText();
+//$telegraph->loadText('test_text_file');
 
-$new_telegraph = new FileStorage;
-$new_telegraph->create($telegraph);
-$new_telegraph->read('test_text_file');
-$new_telegraph->update('test_text_file', $telegraph);
+//$new_telegraph = new FileStorage;
+//$new_telegraph->create($telegraph);
+//$new_telegraph->read('test_text_file');
+//$new_telegraph->update('test_text_file', $telegraph);
 
 //$new_telegraph->logMessage('first error');
 //$new_telegraph->logMessage('second error');
