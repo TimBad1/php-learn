@@ -50,7 +50,7 @@ class TelegraphText {
 
     public function __get($name){
         switch ($name) {
-            case '$published':
+            case 'published':
                 return $this->published;
             case 'slug':
                 return $this->slug;

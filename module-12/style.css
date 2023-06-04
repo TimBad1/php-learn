@@ -1,0 +1,175 @@
+   *{
+        font-family: 'Roboto', sans-serif;
+    }
+
+	html, body{
+		margin: 0;
+		padding: 0;
+		background-color: #f6f7f9;
+	}
+
+	header{
+		height: 100px;
+		padding: 0 40px;
+	}
+
+	header > div{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.popup-container{
+		background-color: #000000b3;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		display: none;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.popup{
+		background-color: white;
+		width: 300px;
+		height: 300px;
+		padding: 30px;
+		border-radius: 5px;
+	}
+
+	.links_menu1{
+		margin-right: 30px;
+	}
+
+	.fixed-container{
+		max-width: 1000px;
+		height: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.first-block{
+		height: 300px;		
+	}
+
+	.first-block > div{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		background-image: url('img/man.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right center;
+	}
+
+	h1{
+		font-size: 3em;
+		margin-bottom: 0;
+	}
+
+	section{
+		padding: 40px;
+	}
+
+	.second-block{
+		height: 350px;		
+	}
+
+	a {
+		color: black;
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+		color: green;
+		margin-right: 20px;
+	}
+
+	.services {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 30px;
+	}
+
+	.services img{
+		width: 150px;
+		margin-bottom: 30px;
+	}
+	.services > div{
+		width: 200px;
+	}
+	.price-info{
+		background-color: #3d52fe;
+		color: white;
+		height: 250px;
+	}
+ 
+	button{
+		padding: 5px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+		max-width: 160px;
+		font-size: 10px;
+	}
+
+	.telephone{
+		margin-right: 20px;
+	}
+
+	.hint{
+		font-size: 10px;
+	}
+
+	.examples {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 30px;
+	}
+
+	.examples img{
+		width: 250px;
+		margin-bottom: 10px;
+	}
+
+	.dark-button{
+		border: 1px solid #3d52fe;
+		background-color: #3d52fe;
+		color: white;	
+		margin-top: 20px;
+	}
+
+	.light-button{
+		border: 1px solid black;
+		background-color: transparent;
+	}
+
+	.box-info{
+		max-width: 400px;
+		height: 200px;
+		padding: 20px 0px 20px 60px;		
+	}
+	footer{
+		padding: 40px;
+	}
+	.footer-inside-row{
+		font-size: 10px;
+		height: 60px;
+		display: flex;
+		justify-content: space-between;
+		padding: 0px 60px 20px 60px;
+	}
+	.footer-inside-colunm{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		
+	}
+	.communities{
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
+	}
+	.communities_img{
+		height: 10px;
+	}
