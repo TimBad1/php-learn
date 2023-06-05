@@ -1,8 +1,7 @@
 <?php
-
-require_once '../interfaces/LoggerInterface.php';
-require_once '../interfaces/EventListenerInterface.php';
-require_once './TelegraphText.php';
+//require_once '/interfaces/LoggerInterface.php';
+//require_once '../interfaces/EventListenerInterface.php';
+//require_once './TelegraphText.php';
 
 abstract class Storage implements LoggerInterface, EventListenerInterface {
     abstract function create(TelegraphText $obj);
